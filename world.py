@@ -27,16 +27,16 @@ class StageCreation:
         self.tile = tile
         self.set_image()
 
-    def set_image(self):
-        if self.tile == 0:
+    def set_image(self, tile):
+        if tile == 0:
             self.image = pygame.image.load("tile-0-pixilart.png")
-        elif self.tile == 1 or self.tile == 4:
+        elif tile == 1 or tile == 4:
             self.image = pygame.image.load("tile-1-pixilart.png")
             self.image = pygame.transform.scale(self.image, (24, 24))
-        elif self.tile == 2:
+        elif tile == 2:
             self.image = pygame.image.load("tile-2-pixilart.png")
             self.image = pygame.transform.scale(self.image, (24, 24))
-        elif self.tile == 3:
+        elif tile == 3:
             self.image = pygame.image.load("tile-3-pixilart.png")
             self.image = pygame.transform.scale(self.image, (24, 24))
 
@@ -47,3 +47,4 @@ class StageCreation:
                 self.x += 24
             self.x = 0
             self.y += 24
+
