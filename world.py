@@ -6,10 +6,10 @@ class StageCreation:
     def __init__(self, stage, x, y):
         self.tile = None
         self.world = None
+        self.rect = None
+        self.image = None
         self.x = x
         self.y = y
-        self.size = self.image.get_size()
-        self.rect = pygame.Rect(self.x, self.y, self.size[0], self.size[1])
         self.stage = stage
         self.stage = self.create_list()
 
@@ -23,15 +23,11 @@ class StageCreation:
             self.stage = [list(line) for line in world]
         return self.stage
 
-    def image(self, tile):
-        self.tile = tile
-        self.set_image()
-
     def set_image(self, tile):
         if tile == 0:
             self.image = pygame.image.load("tile-0-pixilart.png")
         elif tile == 1 or tile == 4:
-            self.image = pygame.image.load("tile-1-pixilart.png")
+            self.image = pygame.image.load("tile-0-pixilart.png")
             self.image = pygame.transform.scale(self.image, (24, 24))
         elif tile == 2:
             self.image = pygame.image.load("tile-2-pixilart.png")
@@ -39,12 +35,13 @@ class StageCreation:
         elif tile == 3:
             self.image = pygame.image.load("tile-3-pixilart.png")
             self.image = pygame.transform.scale(self.image, (24, 24))
+        self.rect = self.image.get_rect(topleft=(24, 24))
 
-    def draw(self):
-        for i in self.stage:
-            for j in i:
-                self.stage[i][j].set_image(self.stage[i][j][0])
+    def draw(self, screen):
+        for row in self.stage:
+            for column in row:
+                self.set_image(column)
                 self.x += 24
+                screen.blit(self.image, (self.x, self.y))
             self.x = 0
             self.y += 24
-
