@@ -22,24 +22,25 @@ class StageCreation:
             return [list(line) for line in world]
 
     def set_image(self, tile):
-        if tile == 0:
+        if tile == "0":
             self.image = pygame.image.load("tile-0-pixilart.png")
-        elif tile == 1 or tile == 4:
+            self.image = pygame.transform.scale(self.image, (32, 32))
+        elif tile == "1" or tile == "4":
             self.image = pygame.image.load("tile-0-pixilart.png")
-            self.image = pygame.transform.scale(self.image, (24, 24))
-        elif tile == 2:
+            self.image = pygame.transform.scale(self.image, (32, 32))
+        elif tile == "2":
             self.image = pygame.image.load("tile-2-pixilart.png")
-            self.image = pygame.transform.scale(self.image, (24, 24))
-        elif tile == 3:
+            self.image = pygame.transform.scale(self.image, (32, 32))
+        elif tile == "3":
             self.image = pygame.image.load("tile-3-pixilart.png")
-            self.image = pygame.transform.scale(self.image, (24, 24))
+            self.image = pygame.transform.scale(self.image, (32, 32))
         self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
     def draw(self, screen):
         for i, row in enumerate(self.stage_map):
             for j, tile in enumerate(row):
-                self.x = i * 24
-                self.y = j * 24
-                print(tile)
+                self.x = i * 32
+                self.y = j * 32
                 self.set_image(tile)
                 screen.blit(self.image, (self.x, self.y))
+
