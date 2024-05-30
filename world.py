@@ -5,23 +5,21 @@ class StageCreation:
 
     def __init__(self, stage, x, y):
         self.tile = None
-        self.world = None
+        self.world = []
         self.rect = None
         self.image = None
         self.x = x
         self.y = y
         self.stage = stage
-        self.stage = self.create_list()
+        self.stage_map = self.create_list()
 
     def create_list(self):
-        self.stage = []
         world = []
         if self.stage == 1:
             with open("Stage 1", "r") as t:
                 for line in t:
-                    self.world.append(line.strip())
-            self.stage = [list(line) for line in world]
-        return self.stage
+                    world.append(line.strip())
+            return [list(line) for line in world]
 
     def set_image(self, tile):
         if tile == 0:
@@ -35,13 +33,13 @@ class StageCreation:
         elif tile == 3:
             self.image = pygame.image.load("tile-3-pixilart.png")
             self.image = pygame.transform.scale(self.image, (24, 24))
-        self.rect = self.image.get_rect(topleft=(24, 24))
+        self.rect = self.image.get_rect(topleft=(self.x, self.y))
 
     def draw(self, screen):
-        for row in self.stage:
-            for column in row:
-                self.set_image(column)
-                self.x += 24
+        for i, row in enumerate(self.stage_map):
+            for j, tile in enumerate(row):
+                self.x = i * 24
+                self.y = j * 24
+                print(tile)
+                self.set_image(tile)
                 screen.blit(self.image, (self.x, self.y))
-            self.x = 0
-            self.y += 24
