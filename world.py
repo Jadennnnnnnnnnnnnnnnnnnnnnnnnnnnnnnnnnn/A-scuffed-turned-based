@@ -43,4 +43,7 @@ class StageCreation:
                 self.y = j * 32
                 self.set_image(tile)
                 screen.blit(self.image, (self.x, self.y))
-
+                
+    def is_passable(self, x, y):
+        tile = self.stage_map[y][x]
+        return True if tile == "2" else False
