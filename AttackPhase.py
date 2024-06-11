@@ -12,7 +12,7 @@ class Damage:
     @staticmethod
     def attack(attacker, target):
         damage = Damage.calculate_damage(attacker, target)
-        target.take_damage(damage)
+        target.damage(damage)
 
     @staticmethod
     def damage(target, damage):
